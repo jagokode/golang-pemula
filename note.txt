@@ -1,1 +1,25 @@
 go run main.go 
+
+Best practice: 
+ Define variable as "local" as possible
+ Create the variable where you need it
+
+Local Variables:
+ Define inside a function or a block
+ They can be accessed only inside that function or block of code
+
+Readable code -> Encapsulated the logic which belongs together:
+ Greet user --> greetUsers()
+ Get user input --> getUserInput()
+ Validate user input --> validateUserInput()
+ check if data valid 
+ Booking ticket --> bookTicket()
+ Get first names --> getFirstNames()
+ Print frist names 
+ If no tickets left, exit program
+
+More Use Cases of Functions:
+ Group logic that belongs together
+ Reuse logic and so reducing duplication of code 
+  Ex: Define variable once and reuse it many times 
+      Validate user input in different city
