@@ -1,15 +1,17 @@
 package main
 
 import (
+	"booking-app/helper"
 	"fmt"
-	"strings"
+	"strconv"
 )
 
 // Package Level Variables (Didefinisikan di atas semua function)
 const tiketKonferensi = 50
-var namaKonferensi = "Konferensi Golang" 
 var tiketTersedia uint = 50
-var pemesanan = []string{}
+var namaKonferensi = "Konferensi Golang" 
+var pemesanan = make([]map[string]string, 0)
+// var pemesanan = []string{}
 
 func main() {
 	salamPembuka()		
@@ -17,7 +19,7 @@ func main() {
 	for {
 		namaDepan, namaBelakang, email, jumlahTiket := dataPendaftar()
 
-		cekNamaLengkap, cekEmail, cekJumlahTiket := validasiDataPendaftar(namaDepan, namaBelakang, email, jumlahTiket)
+		cekNamaLengkap, cekEmail, cekJumlahTiket := helper.ValidasiDataPendaftar(namaDepan, namaBelakang, email, jumlahTiket, tiketTersedia)
 
 		if cekJumlahTiket && cekNamaLengkap && cekEmail {
 			pesanTiket(jumlahTiket, namaDepan, namaBelakang, email)
@@ -54,20 +56,11 @@ func salamPembuka() {
 func daftarPeserta() []string {
 	daftarNamaDepan := []string{}
 	for _, peserta := range pemesanan {
-			var daftarNama = strings.Fields(peserta)
-			daftarNamaDepan = append(daftarNamaDepan, daftarNama[0])
+			// var daftarNama = strings.Fields(peserta)
+			daftarNamaDepan = append(daftarNamaDepan, peserta["namaDepan"])
 	}
 	
 	return daftarNamaDepan
-}
-
-func validasiDataPendaftar(namaDepan string, namaBelakang string, email string, jumlahTiket uint) (bool, bool, bool) {
-	// input validation
-		cekNamaLengkap := len(namaDepan) >= 2 && len(namaBelakang) >= 2
-		cekEmail := strings.Contains(email, "@")
-		cekJumlahTiket := jumlahTiket <= tiketTersedia
-
-		return cekEmail, cekNamaLengkap, cekJumlahTiket
 }
 
 func dataPendaftar() (string, string, string, uint) {
@@ -94,8 +87,18 @@ func dataPendaftar() (string, string, string, uint) {
 
 func pesanTiket(jumlahTiket uint, namaDepan string, namaBelakang string, email string) {
 	tiketTersedia = tiketTersedia - jumlahTiket
-			pemesanan = append(pemesanan, namaDepan + " " + namaBelakang)
+
+	// buat map untuk pemesan
+	var dataPemesan = make(map[string]string) 
+	dataPemesan["namaDepan"] = namaDepan
+	dataPemesan["namaBelakang"] = namaBelakang
+	dataPemesan["email"] = email
+	dataPemesan["jumlahTiket"] = strconv.FormatUint(uint64(jumlahTiket), 10)
+
+	pemesanan = append(pemesanan, dataPemesan)
+	fmt.Printf("Daftar pemesanan: %v\n", pemesanan)
+	// pemesanan = append(pemesanan, namaDepan + " " + namaBelakang)
 	
-			fmt.Printf("Terima kasih %v %v sudah memesan %v tiket. Anda akan menerima konfirmasi melalui email %v\n", namaDepan, namaBelakang, jumlahTiket, email)
-			fmt.Printf("%v tiket tersedia untuk %v\n", tiketTersedia, namaKonferensi)
+	fmt.Printf("Terima kasih %v %v sudah memesan %v tiket. Anda akan menerima konfirmasi melalui email %v\n", namaDepan, namaBelakang, jumlahTiket, email)
+	fmt.Printf("%v tiket tersedia untuk %v\n", tiketTersedia, namaKonferensi)
 }

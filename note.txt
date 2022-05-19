@@ -1,4 +1,14 @@
-go run main.go 
+
+for 1 main file: go run main.go 
+for many files, ex: 
+    1. go rum main.go helper.go
+    2. go run . 
+
+Go programs are organized into packages
+
+A package is a collection of Go files 
+
+Scope: Package Level (Variables and Functions defined outside any function, can be accessed in all other files within the same package)
 
 Best practice: 
  Define variable as "local" as possible
@@ -23,3 +33,55 @@ More Use Cases of Functions:
  Reuse logic and so reducing duplication of code 
   Ex: Define variable once and reuse it many times 
       Validate user input in different city
+
+
+Multiple Packages in your application, ex:
+    main package: main.go, helper.go 
+    inventory package: invent1.go, invent2.go 
+    ui package: ui1.go, ui2.go, ui3.go 
+
+Put every packages in its folder with the same name with the package
+
+Import another function from another package if we want to use it. Import package from root module. In this case, root module is "booking-app"
+
+Exporting a variable or function by Capitalize first letter: 
+    Make it avaiable for all packages in the app 
+
+3 Levels of Scope:
+    1. Local (only be used within that function or block code): 
+        declaration within function
+        declaration within block (e.g. for, if-else)
+    2. Package (can be used everywhere in the same package):
+        declaration outside all functions
+    3. Global (can be used everywhere across all packages):
+        declaration outsid all functions & uppercase first letter 
+
+
+Maps 
+    All keys have the same data type 
+    All values have the same data type
+
+    Contoh:
+        var mySlice []string 
+        var mayMap map[string]string
+
+Creating a slice with "make"
+    Alternatie way to creat a slice 
+    We need to define the initial size of the slice 
+
+
+Iterating over a list of string:
+
+pemesanan = ["John Doe", "Jane Smith"]
+
+Element is a string: "John Doe" 
+
+
+Iterating over a list of map:
+
+pemesanan = [
+    {namaDepan: "John", namaBelakang: "Doe"}
+    {namaDepan: "Jane", namaBelakang: "Smith"}
+]
+
+Element si a map: {namaDepan: "John", namaBelakang: "Doe"}
