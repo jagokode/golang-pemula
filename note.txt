@@ -85,3 +85,29 @@ pemesanan = [
 ]
 
 Element si a map: {namaDepan: "John", namaBelakang: "Doe"}
+
+
+Struct or Structure : can hold mixed data types 
+
+"type" statement - Custome Types 
+    The type keyword creates a new type, with the name you specify
+    In fact, you could also creat a type based on every other data type like int, string, etc.
+
+Defining a structure:
+    Mixed data type 
+    Defining a structure (which fields) of the User Type 
+    It's like a lightweight class in other program languanges, which e.g. doesn't support inheritance
+
+"time" - functionality for time 
+    The sleep function stops or blocks the current "thread" (goroutine) execution for the defined duration 
+
+"go" keyword:
+    "go ..." - starts a new goroutine
+    A goroutine is a lightweight thread managed by the Go run time 
+
+Waitgroup
+    waits for the launched goroutine to finish
+    Package "sync" provides synchronization functionality
+    Add: Sets the number of goroutines to wait for(increases the counter by the provided number)
+    Wait: Blocks until the Waitgroup counter is 0 
+    Done: Decrements the Waitgroup counter by 1. So this is called by the goroutine to indicate that it's finished
